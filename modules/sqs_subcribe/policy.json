@@ -1,0 +1,20 @@
+{
+  "Version": "2012-10-17",
+  "Id": "arn:aws:sqs:ap-southeast-1:${account_id}:puravida/SQSDefaultPolicy",
+  "Statement": [
+    {
+      "Sid": "allow-${sns_topic_arn}",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "*"
+      },
+      "Action": "SQS:SendMessage",
+      "Resource": "${sqs_queue_arn}",
+      "Condition": {
+        "ArnLike": {
+          "aws:SourceArn": "${sns_topic_arn}"
+        }
+      }
+    }
+  ]
+}
